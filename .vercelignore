@@ -1,0 +1,8 @@
+# Ignore large files
+.playwright-mcp/
+server/temp/
+*.mp3
+*.mp4
+*.mp4.part
+node_modules/
+.git/

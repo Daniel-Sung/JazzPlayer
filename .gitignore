@@ -31,3 +31,5 @@ server/temp/
 
 # Playwright MCP
 .playwright-mcp/
+
+.vercel

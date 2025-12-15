@@ -10,10 +10,29 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
+
+// CORS configuration
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:5174',
+  'https://jazzplayer-pc3b06524-minsung-sungs-projects.vercel.app',
+  /\.vercel\.app$/
+];
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.some(allowed =>
+      allowed instanceof RegExp ? allowed.test(origin) : allowed === origin
+    )) {
+      return callback(null, true);
+    }
+    return callback(null, true); // Allow all for now
+  },
+  credentials: true
+}));
 app.use(express.json());
 
 // Create temp directory for audio files
